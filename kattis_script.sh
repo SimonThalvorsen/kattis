@@ -5,6 +5,7 @@ SRC_FOLDER="src"
 README_FILE="README.md"
 LANGUAGE_FOLDER_MAP=("python:Python 3" "c:C" "cpp:C++" "java:Java")
 EXTENSION_MAP=("python:.py" "c:.c" "cpp:.cpp" "java:.java")
+REPO_URL="https://github.com/SimonThalvorsen/kattis"
 
 # Helper functions
 get_language_folder() {
@@ -37,7 +38,7 @@ generate_readme_entry() {
     local problem_url=$2
     local language=$3
     local lang_folder=$(get_language_folder "$language")
-    local rel_path="$SRC_FOLDER/$problem_name/$lang_folder"
+    local rel_path="$REPO_URL/$SRC_FOLDER/$problem_name/$lang_folder"
     local kattis_link="[![:cat:](https://open.kattis.com/favicon)]($problem_url)"
     echo "| [$problem_name]($rel_path) | [$lang_folder]($rel_path) | $kattis_link |"
 }
@@ -99,6 +100,7 @@ update_readme "$readme_entry"
 
 # Add the file to Git and open in editor
 git add "$file_path"
+git add "$README_FILE"
 $editor "$file_path"
 
 echo "File $file_path created, README updated, and file added to git."
