@@ -5,7 +5,7 @@ SRC_FOLDER="src"
 README_FILE="README.md"
 LANGUAGE_FOLDER_MAP=("python:Python 3" "c:C" "cpp:C++" "java:Java")
 EXTENSION_MAP=("python:.py" "c:.c" "cpp:.cpp" "java:.java")
-REPO_URL="https://github.com/SimonThalvorsen/kattis"
+REPO_URL="https://github.com/SimonThalvorsen/kattis/tree/master"
 
 # Helper functions
 get_language_folder() {
