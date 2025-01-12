@@ -1,13 +1,11 @@
 #!/bin/bash
 
-# Constants
 SRC_FOLDER="src"
 README_FILE="README.md"
-LANGUAGE_FOLDER_MAP=("python:Python%203" "c:C" "cpp:C++" "java:Java")
+LANGUAGE_FOLDER_MAP=("python:Python 3" "c:C" "cpp:C++" "java:Java")
 EXTENSION_MAP=("python:.py" "c:.c" "cpp:.cpp" "java:.java")
 REPO_URL="https://github.com/SimonThalvorsen/kattis/tree/master"
 
-# Helper functions
 get_language_folder() {
     for pair in "${LANGUAGE_FOLDER_MAP[@]}"; do
         if [[ $pair == "$1:"* ]]; then
@@ -38,9 +36,9 @@ generate_readme_entry() {
     local problem_url=$2
     local language=$3
     local lang_folder=$(get_language_folder "$language")
-    local rel_path="$REPO_URL/$SRC_FOLDER/$problem_name/$lang_folder"
+    local problem_path=$(echo "$REPO_URL/$SRC_FOLDER/$problem_name/$lang_folder/$problem_name" | sed 's/ /%20/g')
     local kattis_link="[![:cat:](https://open.kattis.com/favicon)]($problem_url)"
-    echo "| [$problem_name]($rel_path) | [$lang_folder]($rel_path) | $kattis_link |"
+    echo "| [$problem_name]($problem_path) | [$lang_folder]($problem_path) | $kattis_link |"
 }
 
 update_readme() {
@@ -53,7 +51,7 @@ update_readme() {
         echo "| - | - | - |" >> "$README_FILE"
     fi
 
-    # Add the new entry
+    # Add the new entry if it doesn't already exist
     if ! grep -qF "$entry" "$README_FILE"; then
         echo "$entry" >> "$README_FILE"
     fi
@@ -73,7 +71,6 @@ create_problem_structure() {
     echo "$problem_path"
 }
 
-# Main logic
 if [[ $# -lt 2 ]]; then
     echo "Usage: ./kattis_script.sh URL_TO_PROBLEM <programming_language>"
     exit 1
