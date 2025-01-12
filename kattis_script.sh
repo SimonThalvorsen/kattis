@@ -31,6 +31,7 @@ extract_problem_name() {
     echo "${url##*/}"
 }
 
+EXTENSION_MAP=("python:.py" "c:.c" "cpp:.cpp" "java:.java")
 generate_readme_entry() {
     local problem_name=$1
     local problem_url=$2
@@ -38,7 +39,7 @@ generate_readme_entry() {
     local lang_folder=$(get_language_folder "$language")
     local problem_path=$(echo "$REPO_URL/$SRC_FOLDER/$problem_name/$lang_folder/$problem_name" | sed 's/ /%20/g')
     local kattis_link="[![:cat:](https://open.kattis.com/favicon)]($problem_url)"
-    echo "| [$problem_name]($problem_path) | [$lang_folder]($problem_path) | $kattis_link |"
+    echo "| [$problem_name]($problem_path) | [$lang_folder]($problem_path$(get_file_extension "$language")) | $kattis_link |"
 }
 
 update_readme() {
