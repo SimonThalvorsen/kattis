@@ -37,9 +37,11 @@ generate_readme_entry() {
     local problem_url=$2
     local language=$3
     local lang_folder=$(get_language_folder "$language")
-    local problem_path=$(echo "$REPO_URL/$SRC_FOLDER/$problem_name/$lang_folder/$problem_name" | sed 's/ /%20/g')
+    local problem_path=$(echo "$REPO_URL/$SRC_FOLDER/$problem_name" | sed 's/ /%20/g')
+    local problem_path_curr=$(echo "$REPO_URL/$SRC_FOLDER/$problem_name/$lang_folder/$problem_name" | sed 's/ /%20/g')
+
     local kattis_link="[![:cat:](https://open.kattis.com/favicon)]($problem_url)"
-    echo "| [$problem_name]($problem_path) | [$lang_folder]($problem_path$(get_file_extension "$language")) | $kattis_link |"
+    echo "| [$problem_name]($problem_path) | [$lang_folder]($problem_path_curr$(get_file_extension "$language")) | $kattis_link |"
 }
 
 update_readme() {
