@@ -1,4 +1,2 @@
-inp = int(input())
-print("+" + "-" * inp + "+")
-print(("|" + " " * inp + "|\n") * inp, end="")
-print("+" + "-" * inp + "+")
+print(f"+{'-' * (inp := int(input()))}+\n{('|' + ' ' * inp + '|\n') * inp}+{'-' * inp}+")
+
